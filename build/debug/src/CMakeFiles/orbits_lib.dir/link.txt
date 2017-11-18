@@ -1,2 +1,0 @@
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar qc liborbits_lib.a  CMakeFiles/orbits_lib.dir/Floor.cpp.o CMakeFiles/orbits_lib.dir/Triangle.cpp.o CMakeFiles/orbits_lib.dir/Wavefront.cpp.o CMakeFiles/orbits_lib.dir/glutil.cpp.o
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib liborbits_lib.a
