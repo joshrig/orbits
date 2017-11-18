@@ -1,0 +1,28 @@
+
+About
+-----
+
+
+
+Prerequisites
+-------------
+
+
+
+Building
+--------
+
+cmake -DCMAKE_BUILD_TYPE=Debug -H. -Bbuild/debug
+cd build/debug
+
+cmake -DCMAKE_BUILD_TYPE=Release -H. -Bbuild/release
+cd build/release
+
+make -j4
+
+env CTEST_OUTPUT_ON_FAILURE=1 make test
+
+
+
+Installing
+----------
