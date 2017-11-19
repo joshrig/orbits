@@ -1,28 +1,48 @@
 
+
+
 About
 -----
+
+Satellite Orbit Simulator using TLE data from NORAD.
 
 
 
 Prerequisites
 -------------
 
+CMake - Cross-platform build tool
+GLEW  - The OpenGL extension wrangler
+GLFW  - Toolkit for creating OpenGL contexts, handling input, etc...
+glm   - GL math library
+
 
 
 Building
 --------
 
-cmake -DCMAKE_BUILD_TYPE=Debug -H. -Bbuild/debug
-cd build/debug
+$ cmake -DCMAKE_BUILD_TYPE=Debug -H. -Bbuild/debug
+$ cd build/debug
 
-cmake -DCMAKE_BUILD_TYPE=Release -H. -Bbuild/release
-cd build/release
+OR
 
-make -j4
+$ cmake -DCMAKE_BUILD_TYPE=Release -H. -Bbuild/release
+$ cd build/release
 
-env CTEST_OUTPUT_ON_FAILURE=1 make test
+$ make -j4
+
+$ env CTEST_OUTPUT_ON_FAILURE=1 make test
 
 
 
 Installing
 ----------
+
+$ make install
+
+This will install to the top-level project directory but can be over-ridden:
+
+$ make DESTDIR=/some/prefix/path install
+
+
+
