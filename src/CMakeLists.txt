@@ -1,6 +1,6 @@
 configure_file("settings.h.in" "settings.h")
 
-set(CMAKE_VERBOSE_MAKEFILE TRUE)
+#set(CMAKE_VERBOSE_MAKEFILE TRUE)
 
 # find some dependencies
 find_package(Boost 1.59 REQUIRED)
@@ -36,3 +36,14 @@ target_link_libraries(
   ${GLEW_LIBRARIES}
   ${OPENGL_LIBRARIES}
   )
+
+# where to install everything
+if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+  set(CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}/dist" CACHE PATH "..." FORCE)
+endif()
+FILE(GLOB shader_files
+  "${CMAKE_CURRENT_SOURCE_DIR}/*.frag"
+  "${CMAKE_CURRENT_SOURCE_DIR}/*.vert")
+INSTALL(FILES ${shader_files} DESTINATION bin)
+INSTALL(TARGETS orbits RUNTIME DESTINATION bin)
+
