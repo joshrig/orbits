@@ -23,7 +23,13 @@ include_directories(
 set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 
 # create a static library of all the support modules sans main
-add_library(orbits_lib Floor.cpp Triangle.cpp Wavefront.cpp glutil.cpp)
+add_library(orbits_lib
+  Earth.cpp
+  Floor.cpp
+  Triangle.cpp
+  Wavefront.cpp
+  glutil.cpp
+  BMPLoader.cpp)
 
 # add the main executable
 add_executable(orbits main.cpp)
@@ -42,6 +48,10 @@ if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   set(CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}/dist" CACHE PATH "..." FORCE)
 endif()
 FILE(GLOB shader_files "${CMAKE_CURRENT_SOURCE_DIR}/shaders/*")
-INSTALL(FILES ${shader_files} DESTINATION bin)
+FILE(GLOB resource_files
+  "${CMAKE_CURRENT_SOURCE_DIR}/resources/*.obj"
+  "${CMAKE_CURRENT_SOURCE_DIR}/resources/*.bmp"
+  )
+INSTALL(FILES ${shader_files} ${resource_files} DESTINATION bin)
 INSTALL(TARGETS orbits RUNTIME DESTINATION bin)
 

@@ -210,16 +210,17 @@ void Wavefront::Load_2()
     is.close();
 
 
-    cout << "wrote " << v_index << " vertices" << endl;
-    cout << "wrote " << vn_index << " normals" << endl;
-    cout << "wrote " << vt_index << " texels" << endl;
-    cout << "wrote " << f_index << " faces" << endl;
+    cout << "loaded " << v_index << " vertices" << endl;
+    cout << "loaded " << vn_index << " normals" << endl;
+    cout << "loaded " << vt_index << " texels" << endl;
+    cout << "loaded " << f_index << " faces" << endl;
 }
 
 
-vector<float> Wavefront::geometry()
+vector<float> Wavefront::vertices()
 {
-    vector<float> geometry;
+    enum { X, Y, Z };
+    vector<float> vertices;
 
 
     for (int i = 0; i < m_nfaces; i++)
@@ -228,22 +229,51 @@ vector<float> Wavefront::geometry()
         int vB = m_faces[i][3] - 1;
         int vC = m_faces[i][6] - 1;
 
-        geometry.push_back(m_vertices[vA][0]);
-        geometry.push_back(m_vertices[vA][1]);
-        geometry.push_back(m_vertices[vA][2]);
+        vertices.push_back(m_vertices[vA][X]);
+        vertices.push_back(m_vertices[vA][Y]);
+        vertices.push_back(m_vertices[vA][Z]);
 
-        geometry.push_back(m_vertices[vB][0]);
-        geometry.push_back(m_vertices[vB][1]);
-        geometry.push_back(m_vertices[vB][2]);
+        vertices.push_back(m_vertices[vB][X]);
+        vertices.push_back(m_vertices[vB][Y]);
+        vertices.push_back(m_vertices[vB][Z]);
 
-        geometry.push_back(m_vertices[vC][0]);
-        geometry.push_back(m_vertices[vC][1]);
-        geometry.push_back(m_vertices[vC][2]);
+        vertices.push_back(m_vertices[vC][X]);
+        vertices.push_back(m_vertices[vC][Y]);
+        vertices.push_back(m_vertices[vC][Z]);
     }
 
 
-    cout << geometry.size() / 3 << " points" << endl;
+    cout << vertices.size() / 3 << " vertices" << endl;
 
 
-    return geometry;
+    return vertices;
+}
+
+vector<float> Wavefront::uvdata()
+{
+    enum { U, V };
+    vector<float> uvdata;
+
+
+    for (int i = 0; i < m_nfaces; i++)
+    {
+        int vA = m_faces[i][1] - 1;
+        int vB = m_faces[i][4] - 1;
+        int vC = m_faces[i][7] - 1;
+
+        uvdata.push_back(m_texels[vA][U]);
+        uvdata.push_back(m_texels[vA][V]);
+
+        uvdata.push_back(m_texels[vB][U]);
+        uvdata.push_back(m_texels[vB][V]);
+
+        uvdata.push_back(m_texels[vC][U]);
+        uvdata.push_back(m_texels[vC][V]);
+    }
+
+
+    cout << uvdata.size() / 3 << " uv coords" << endl;
+
+
+    return uvdata;
 }

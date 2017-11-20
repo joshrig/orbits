@@ -14,6 +14,7 @@
 #include "glutil.h"
 #include "Floor.h"
 #include "Triangle.h"
+#include "Earth.h"
 
 using namespace glutil;
 using namespace std;
@@ -121,9 +122,11 @@ int main()
     glBindVertexArray(vao);
 
     
-
+#if 0
     Floor floor;
     Triangle triangle;
+#endif
+    Earth earth;
 
     
     int params = -1;
@@ -177,13 +180,9 @@ int main()
 
     log::printall(shader_program);
 
-    glm::vec3 camera_pos(0, 1.5, -5);
+    glm::vec3 camera_pos(0, 0, -2);
     glm::vec3 camera_foc = glm::normalize(glm::vec3(0, 0, 1));
     glm::vec3 camera_up = glm::normalize(glm::vec3(0, 1, 0));
-
-    // translate 
-    glm::mat4 floor_xlate = glm::translate(glm::mat4(1.0f), glm::vec3(-50, 0, -50));
-    glm::mat4 tri_xlate = glm::translate(glm::mat4(1.0f), glm::vec3(-1, 0, 0));
 
     // move the camera to the right location
     glm::mat4 camera = glm::lookAt(camera_pos, camera_pos + camera_foc, camera_up);
@@ -191,13 +190,20 @@ int main()
     // create the frustrum
     glm::mat4 proj = glm::perspective<float>(90.0,      // fov angle
                                              1,         // aspect ratio
-                                             0.1,       // near
-                                             100.0);    // far
+                                             0.0001,    // near
+                                             1000.0);   // far
+
+#if 0
+    // translate 
+    glm::mat4 floor_xlate = glm::translate(glm::mat4(1.0f), glm::vec3(-50, 0, -50));
+    glm::mat4 tri_xlate = glm::translate(glm::mat4(1.0f), glm::vec3(-1, 0, 0));
 
     // combine the transformations
     glm::mat4 floor_mvp = proj * camera * floor_xlate;
     glm::mat4 tri_mvp = proj * camera * tri_xlate;
-
+#endif
+    glm::mat4 earth_xlate(1.0);
+    glm::mat4 earth_mvp = proj * camera;
     
     // get the location of the uniform variable
     int mvp_loc = glGetUniformLocation(shader_program, "mvp");
@@ -234,11 +240,13 @@ int main()
             int count;
             const float *axes = glfwGetJoystickAxes(GLFW_JOYSTICK_1, &count);
 
+
             float x_val = axes[0] * -1;
             float y_val_dn = axes[4] * -1;
             float y_val_up = axes[5];
             float z_val = axes[1] * -1;
             float rot_val = axes[2] * -1;
+            // float rot_val2 = axes[3] * -1;
 
             if (x_val >= 0.1)
             {
@@ -278,6 +286,13 @@ int main()
                 camera_foc = glm::rotate(camera_foc, camera_rv * rot_val, camera_up);
                 moved = true;
             }
+            // if (rot_val2 >= 0.1 || rot_val2 <= -0.1)
+            // {
+            //     glm::vec3 right = glm::normalize(glm::cross(camera_up, camera_foc));
+            //     camera_foc = glm::rotate(right, camera_rv * rot_val, camera_foc);
+            //     camera_up = glm::normalize(glm::cross(right, camera_foc));
+            //     moved = true;
+            // }
         }
         else
         {
@@ -314,9 +329,15 @@ int main()
 
             camera = glm::lookAt(camera_pos, camera_pos + camera_foc, camera_up);
 
+#if 0            
             floor_mvp = proj * camera * floor_xlate;
             tri_mvp = proj * camera * tri_xlate;
+#endif
         }        
+        earth_mvp = proj * camera * earth_xlate;
+        earth_xlate = glm::rotate(glm::mat4(1.0),
+                                  camera_rv * (float)curtime * 5.0f,
+                                  glm::vec3(0.0, 1.0, 0.0));
 
         
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -328,13 +349,15 @@ int main()
 
         glBindVertexArray(vao);
 
-
+#if 0
         glUniformMatrix4fv(mvp_loc, 1, GL_FALSE, glm::value_ptr(floor_mvp));
         floor.render();
 
         glUniformMatrix4fv(mvp_loc, 1, GL_FALSE, glm::value_ptr(tri_mvp));
         triangle.render();
-
+#endif
+        glUniformMatrix4fv(mvp_loc, 1, GL_FALSE, glm::value_ptr(earth_mvp));
+        earth.render();
         
         glfwSwapBuffers(window);
     }

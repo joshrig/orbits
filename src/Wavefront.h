@@ -17,11 +17,6 @@ class Wavefront
 private:
     std::string m_filename;
     
-    int m_nvertices;
-    int m_nnormals;
-    int m_ntexels;
-    int m_nfaces;
-    
     float **m_vertices;
     int   **m_faces;
     float **m_texels;
@@ -34,7 +29,14 @@ public:
     Wavefront(const std::string&);
     ~Wavefront();
 
-    std::vector<float> geometry();
+
+    std::vector<float> vertices();
+    std::vector<float> uvdata();
+
+    int m_nvertices;
+    int m_nnormals;
+    int m_ntexels;
+    int m_nfaces;
 };
 
 
