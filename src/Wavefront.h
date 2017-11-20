@@ -1,6 +1,7 @@
 #ifndef _LOAD_HPP_
 #define _LOAD_HPP_
 
+#include <iostream>
 
 
 class WavefrontException : public std::runtime_error
