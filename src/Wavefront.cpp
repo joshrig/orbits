@@ -277,3 +277,35 @@ vector<float> Wavefront::uvdata()
 
     return uvdata;
 }
+
+vector<float> Wavefront::normals()
+{
+    enum { X, Y, Z };
+    vector<float> normals;
+
+
+    for (int i = 0; i < m_nfaces; i++)
+    {
+        int vA = m_faces[i][2] - 1;
+        int vB = m_faces[i][5] - 1;
+        int vC = m_faces[i][8] - 1;
+
+        normals.push_back(m_normals[vA][X]);
+        normals.push_back(m_normals[vA][Y]);
+        normals.push_back(m_normals[vA][Z]);
+
+        normals.push_back(m_normals[vB][X]);
+        normals.push_back(m_normals[vB][Y]);
+        normals.push_back(m_normals[vB][Z]);
+
+        normals.push_back(m_normals[vC][X]);
+        normals.push_back(m_normals[vC][Y]);
+        normals.push_back(m_normals[vC][Z]);
+    }
+
+
+    cout << normals.size() / 3 << " normals" << endl;
+
+
+    return normals;
+}

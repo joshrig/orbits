@@ -32,6 +32,7 @@ public:
 
     std::vector<float> vertices();
     std::vector<float> uvdata();
+    std::vector<float> normals();
 
     int m_nvertices;
     int m_nnormals;

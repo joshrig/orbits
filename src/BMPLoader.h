@@ -13,11 +13,11 @@ class BMPLoader
 
 public:
     BMPLoader(const std::string& bmpfile);
-    ~BMPLoader();
 
     uint32_t width;
     uint32_t height;
-    uint8_t *data;
+
+    std::shared_ptr<uint8_t> data;
 };
 
 #endif

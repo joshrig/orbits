@@ -180,7 +180,7 @@ int main()
 
     log::printall(shader_program);
 
-    glm::vec3 camera_pos(0, 0, -2);
+    glm::vec3 camera_pos(0, 0, -9);
     glm::vec3 camera_foc = glm::normalize(glm::vec3(0, 0, 1));
     glm::vec3 camera_up = glm::normalize(glm::vec3(0, 1, 0));
 
@@ -188,10 +188,11 @@ int main()
     glm::mat4 camera = glm::lookAt(camera_pos, camera_pos + camera_foc, camera_up);
 
     // create the frustrum
-    glm::mat4 proj = glm::perspective<float>(90.0,      // fov angle
-                                             1,         // aspect ratio
-                                             0.0001,    // near
-                                             1000.0);   // far
+    // glm::mat4 proj = glm::perspective<float>(90.0,      // fov angle
+    //                                          1,         // aspect ratio
+    //                                          0.0001,    // near
+    //                                          1000.0);   // far
+    glm::mat4 proj = glm::ortho<float>(-2.5f, 2.5f, -2.5f, 2.5f, 0.1f, 1000.0f);
 
 #if 0
     // translate 

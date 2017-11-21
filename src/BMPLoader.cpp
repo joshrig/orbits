@@ -38,15 +38,9 @@ BMPLoader::BMPLoader(const string& bmpfile) :
     cout << "width: " << width << endl;
     cout << "height: " << height << endl;
     
-    data = new uint8_t[image_size];
+    data.reset<uint8_t>(new uint8_t[image_size], default_delete<uint8_t[]>());
 
-    fread(data, 1, image_size, fp);
+    fread(data.get(), 1, image_size, fp);
 
     fclose(fp);
-}
-
-BMPLoader::~BMPLoader()
-{
-    if (data)
-        delete [] data;
 }

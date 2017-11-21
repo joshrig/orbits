@@ -19,8 +19,10 @@ private:
     Wavefront m_wf;
     vector<GLfloat> m_vertices;
     vector<GLfloat> m_uvdata;
+    vector<GLfloat> m_normals;
     GLuint m_vertex_vbo;
     GLuint m_uv_vbo;
+    GLuint m_normal_vbo;
     GLuint m_texture;
 
 public:
