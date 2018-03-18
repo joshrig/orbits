@@ -1,0 +1,44 @@
+#+TITLE: 3d notes
+#+AUTHOR: joshua lynch
+#+EMAIL: josh@codeposse.com
+#+STARTUP: hidestars
+#+TODO: T I B D
+
+* satellite orbit PoC & OpenGL goals
+  - [X] grok OpenGL Programming Manual thru chap 5 (up to textures)
+  - [X] grok VAOs and VBOs
+  - [X] how to provide OpenGL with data?
+  - [X] tinker with the various ways OpenGL can draw
+  - [X] draw triangle in NDC
+  - [X] draw cube in NDC
+  - [X] scale / rotate / translate cube (by hand)
+  - [X] change color of cube via uniform variables (by hand)
+  - [X] grok homogenous coordinates
+  - [X] grok various coordinate spaces
+  - [X] grok various coordinate space transforms
+  - [X] grok the projection matrix
+  - [X] load simple model from Blender
+  - [X] make a fully 3d scene with a couple of objects placed on a floor
+  - [X] be able to use the ps4 controller to move around like doom
+  - [X] be able to load models from blender and place them into your scene
+  - [X] grok textures
+  - [X] be able to load materials from blender
+  - [ ] grok lighting
+  - [ ] place multiple different types of light around the scene
+  - [ ] add some simple physics for a two-player game of 3d pong
+  - [ ] render text from opengl
+  - [ ] try to understand the best way to organize opengl code
+  - [X] try creating a world-sized sphere and mapping mars' surface onto it
+  - [ ] try putting a satellite into orbit
+    - [ ] try having the camera follow the satellite's orbit
+  - [ ] understand the camera transform more fully
+  - [ ] understand the projection transfor more fully
+    - [ ] it seems trying different FoV angles flips the view
+  - [ ] try making a spaceship and flying it around
+    - [ ] requires all degrees of freedom
+    - [ ] and some physics
+    - [ ] and probably quaternions
+
+
+
+
